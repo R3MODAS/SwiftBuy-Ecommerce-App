@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Loader */
+
 .loader {
     width: 50px;
     aspect-ratio: 1;
@@ -58,4 +60,31 @@
     100% {
         transform: scaleY(-1) rotate(-135deg)
     }
+}
+
+/* Home */
+#banner{
+    height: 800px;
+    background-image: url("../../public/assets/banner.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    margin-top: 5rem;
+}
+
+.product-container{
+    @apply grid gap-10 place-items-center my-20;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.category-btn{
+    @apply bg-black text-white px-4 py-3 uppercase text-sm rounded-md font-medium transition-colors hover:bg-purple-600 flex items-center justify-center relative;
+}
+
+.category-btn.active{
+    @apply bg-purple-600;
+}
+
+.category-btn.active span{
+    display: block;
 }
