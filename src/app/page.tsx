@@ -1,5 +1,4 @@
 import Banner from "./components/Banner";
-import Categories from "./components/Categories";
 import Products from "./components/Products";
 
 export default function Home() {
@@ -10,7 +9,6 @@ export default function Home() {
 
       {/* Product Section */}
       <section className="container mx-auto py-10">
-        <Categories />
         <Products />
       </section>
     </div>
