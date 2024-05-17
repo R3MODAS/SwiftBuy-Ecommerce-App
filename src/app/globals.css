@@ -76,7 +76,7 @@
 }
 
 .product-card{
-    @apply w-72 p-4 h-96 cursor-pointer hover:scale-95 transition-all bg-gray-100/70 rounded-xl shadow-md;
+    @apply w-72 p-4 h-[370px] cursor-pointer hover:scale-95 transition-all bg-gray-100/70 rounded-xl shadow-md;
 }
 
 .category-btn{
