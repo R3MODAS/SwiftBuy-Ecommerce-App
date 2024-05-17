@@ -4,7 +4,7 @@ import { Product } from "@/app/utils/types";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
-const page = ({ params }: any) => {
+const productId = ({ params }: any) => {
   const [ProductDetails, setProductDetails] = useState<Product | null>(null)
   const { productId } = params
 
@@ -87,4 +87,4 @@ const page = ({ params }: any) => {
   )
 }
 
-export default page
+export default productId
