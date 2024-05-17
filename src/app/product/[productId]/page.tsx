@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
-const productId = () => {
+const ProductId = () => {
   const [ProductDetails, setProductDetails] = useState<Product | null>(null)
   const { productId } = useParams();
 
@@ -89,4 +89,4 @@ const productId = () => {
   )
 }
 
-export default productId
+export default ProductId
