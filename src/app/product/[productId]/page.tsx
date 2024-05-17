@@ -2,15 +2,16 @@
 
 import { Product } from "@/app/utils/types";
 import Link from "next/link";
+import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
-const productId = ({ params }: any) => {
+const productId = () => {
   const [ProductDetails, setProductDetails] = useState<Product | null>(null)
-  const { productId } = params
+  const { productId } = useParams();
 
   useEffect(() => {
     fetchProductDetails()
-  }, [])
+  }, [productId])
 
   const fetchProductDetails = async () => {
     try {
@@ -27,6 +28,7 @@ const productId = ({ params }: any) => {
       console.log(err.message)
     }
   }
+
   return (
     <div className="container mx-auto mt-24">
       {/* Breadcrumbs */}
