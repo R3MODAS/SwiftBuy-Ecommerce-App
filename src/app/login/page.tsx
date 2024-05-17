@@ -7,36 +7,6 @@ const page = () => {
         <h2 className="text-2xl text-center font-bold">Welcome to the SwiftBuy</h2>
         <div className="mt-5">
           <form>
-            <div className="flex items-center gap-x-5 justify-center">
-              <div className="relative mb-4 w-1/2">
-                <input
-                  type="text"
-                  id="firstname"
-                  className="block px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-transparent rounded-lg border border-1 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                  placeholder=""
-                />
-                <label
-                  htmlFor="firstname"
-                  className="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1"
-                >
-                  First name
-                </label>
-              </div>
-              <div className="relative mb-4 w-1/2">
-                <input
-                  type="text"
-                  id="lastName"
-                  className="block px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-transparent rounded-lg border border-1 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                  placeholder=""
-                />
-                <label
-                  htmlFor="lastName"
-                  className="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1"
-                >
-                  Last name
-                </label>
-              </div>
-            </div>
             <div className="relative mb-4">
               <input
                 type="email"
@@ -66,8 +36,8 @@ const page = () => {
               </label>
             </div>
             <div className="text-center">
-              <button className="bg-purple-600 text-white px-5 py-3 rounded-md text-sm font-medium">Signup</button>
-              <p className="mt-4 text-sm">Already Registered? <Link href="/login" className="text-purple-400">Login in</Link></p>
+              <button className="bg-purple-600 text-white px-5 py-3 rounded-md text-sm font-medium">Login</button>
+              <p className="mt-4 text-sm">Not yet Registered? <Link className="text-purple-400" href="/signup">Signup</Link></p>
             </div>
           </form>
         </div>

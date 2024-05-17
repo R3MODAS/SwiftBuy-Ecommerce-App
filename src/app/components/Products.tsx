@@ -11,6 +11,7 @@ const Products = () => {
   const [FilteredProducts, setFilteredProducts] = useState<Product[]>([])
   const [Loading, setLoading] = useState<boolean>(false)
   const [SearchProduct, setSearchProduct] = useState<string>("")
+  const [ErrorMessage, setErrorMessage] = useState<string>("")
 
   // ============== Fetch the Products ==============
   useEffect(() => {
@@ -62,7 +63,19 @@ const Products = () => {
   }, [SearchProduct])
 
   const handleSearchProduct = () => {
-    setFilteredProducts(Products?.filter(product => product?.title?.toLowerCase()?.includes(SearchProduct?.toLowerCase())))
+    if (SearchProduct !== "") {
+      const filteredProducts = Products?.filter(product => product?.title?.toLowerCase()?.includes(SearchProduct?.toLowerCase()))
+      setFilteredProducts(filteredProducts)
+      setErrorMessage("")
+
+      if (filteredProducts.length === 0) {
+        setErrorMessage(`Sorry, we couldn't find any results for "${SearchProduct}"`)
+      }
+    }
+    else {
+      setErrorMessage("")
+      setFilteredProducts(Products)
+    }
   }
 
   const handleResetSearch = () => {
@@ -101,23 +114,23 @@ const Products = () => {
           {
             Loading ? <div className="loader"></div> :
               <>
+                {ErrorMessage && <h3 className="text-2xl font-bold tracking-tight">{ErrorMessage}</h3>}
                 {
-                  FilteredProducts?.length === 0 ? (<h3 className="text-2xl font-bold tracking-tight">Oops! Looks like the Product you are looking is not here</h3>) :
-                    (FilteredProducts?.map((product: any) => (
-                      <Link href={`/product/${product?.id}`} key={product?.id} className="product-card">
-                        <div className="w-full h-44 mb-4">
-                          <img src={product?.image} alt={product?.title} className="w-full h-full object-contain mix-blend-multiply" loading="lazy" />
-                        </div>
-                        <div className="leading-5">
-                          <h3 className="text-base font-bold">{truncateString(product?.title)}</h3>
-                          <p className="text-base my-2 flex items-center gap-1 tracking-tight">
-                            <span className="text-xl text-purple-600"><MdStars /></span>
-                            <span className="text-gray-500 font-medium">{product?.rating?.rate} ({product?.rating?.count})</span>
-                          </p>
-                          <p className="text-base font-semibold">${product?.price}</p>
-                        </div>
-                      </Link>
-                    )))
+                  FilteredProducts?.map((product: any) => (
+                    <Link href={`/product/${product?.id}`} key={product?.id} className="product-card">
+                      <div className="w-full h-44 mb-4">
+                        <img src={product?.image} alt={product?.title} className="w-full h-full object-contain mix-blend-multiply" loading="lazy" />
+                      </div>
+                      <div className="leading-5">
+                        <h3 className="text-base font-bold">{truncateString(product?.title)}</h3>
+                        <p className="text-base my-2 flex items-center gap-1 tracking-tight">
+                          <span className="text-xl text-purple-600"><MdStars /></span>
+                          <span className="text-gray-500 font-medium">{product?.rating?.rate} ({product?.rating?.count})</span>
+                        </p>
+                        <p className="text-base font-semibold">${product?.price}</p>
+                      </div>
+                    </Link>
+                  ))
                 }
               </>
           }
