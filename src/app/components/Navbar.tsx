@@ -1,4 +1,6 @@
-import Link from "next/link"
+"use client";
+
+import Link from "next/link";
 import { FaRegUserCircle } from "react-icons/fa";
 import { IoCartOutline } from "react-icons/io5";
 
@@ -31,7 +33,7 @@ const Navbar = () => {
                 </div>
             </div>
         </header>
-    )
+    );
 }
 
 export default Navbar

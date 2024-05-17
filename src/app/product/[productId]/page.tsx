@@ -1,9 +1,10 @@
-"use client";
+"use client"
 
 import { Product } from "@/app/utils/types";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import axios from "axios";
 
 const ProductId = () => {
   const [ProductDetails, setProductDetails] = useState<Product | null>(null)
@@ -15,15 +16,8 @@ const ProductId = () => {
 
   const fetchProductDetails = async () => {
     try {
-      const response = await fetch(`https://fakestoreapi.com/products/${productId}`)
-      if (!response.ok) {
-        throw new Error(response.statusText)
-      }
-      else {
-        const data = await response.json()
-        console.log(data)
-        setProductDetails(data)
-      }
+      const { data } = await axios.get(`https://fakestoreapi.com/products/${productId}`)
+      setProductDetails(data)
     } catch (err: any) {
       console.log(err.message)
     }

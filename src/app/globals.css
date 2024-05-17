@@ -3,6 +3,10 @@
 @tailwind utilities;
 
 /* Loader */
+.loading-page{
+    @apply flex items-center justify-center mt-10;
+}
+
 .loader {
     width: 50px;
     aspect-ratio: 1;

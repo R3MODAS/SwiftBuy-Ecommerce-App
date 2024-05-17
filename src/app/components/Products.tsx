@@ -1,13 +1,15 @@
+"use client";
+
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { MdStars } from "react-icons/md";
 import { categories } from "../utils/categories";
 import { Product } from "../utils/types";
+import axios from "axios";
 
 const Products = () => {
   const [Products, setProducts] = useState<Product[]>([])
   const [FilteredProducts, setFilteredProducts] = useState<Product[]>([])
-  const [Loading, setLoading] = useState<boolean>(true)
   const [SearchProduct, setSearchProduct] = useState<string>("")
   const [ErrorMessage, setErrorMessage] = useState<string>("")
 
@@ -18,11 +20,9 @@ const Products = () => {
 
   const fetchProductData = async () => {
     try {
-      const response = await fetch(`https://fakestoreapi.com/products`)
-      const data: Product[] = await response.json()
+      const { data } = await axios.get(`https://fakestoreapi.com/products`)
       setProducts(data)
       setFilteredProducts(data)
-      setLoading(false)
     } catch (err: any) {
       console.error(err.message);
     }
@@ -74,11 +74,18 @@ const Products = () => {
     setSearchProduct("")
   }
 
+  if (Products?.length === 0) {
+    return <div className="loading-page">
+      <div className="loader"></div>
+    </div>
+  }
+
   return (
-    <section id="shop">
+    <section>
       <div className="container mx-auto py-10">
         <h2 className="text-center font-bold text-4xl pt-5 pb-16">Obsessed? We Are Too! Shop Now</h2>
 
+        {/* Filter Products */}
         <div className="flex items-center justify-between">
           <div className="flex items-center justify-center gap-x-7">
             {
@@ -101,31 +108,32 @@ const Products = () => {
           </div>
         </div>
 
-        <ul className="product-container">
-          {
-            Loading ? <div className="loader"></div> :
-              <>
-                {ErrorMessage && <h3 className="text-2xl font-bold tracking-tight">{ErrorMessage}</h3>}
-                {
-                  FilteredProducts?.map((product: any) => (
-                    <Link href={`/product/${product?.id}`} key={product?.id} className="product-card">
-                      <div className="w-full h-44 mb-4">
-                        <img src={product?.image} alt={product?.title} className="w-full h-full object-contain mix-blend-multiply" loading="lazy" />
-                      </div>
-                      <div className="leading-5">
-                        <h3 className="text-base font-bold">{truncateString(product?.title)}</h3>
-                        <p className="text-base my-2 flex items-center gap-1 tracking-tight">
-                          <span className="text-xl text-purple-600"><MdStars /></span>
-                          <span className="text-gray-500 font-medium">{product?.rating?.rate} ({product?.rating?.count})</span>
-                        </p>
-                        <p className="text-base font-semibold">${product?.price}</p>
-                      </div>
-                    </Link>
-                  ))
-                }
-              </>
-          }
-        </ul>
+        {/* All Products */}
+        {
+          (Products && Products?.length !== 0) &&
+          <>
+            <ul className="product-container">
+              {ErrorMessage && <h3 className="text-2xl font-bold tracking-tight">{ErrorMessage}</h3>}
+              {
+                FilteredProducts?.map((product: any) => (
+                  <Link href={`/product/${product?.id}`} key={product?.id} className="product-card">
+                    <div className="w-full h-44 mb-4">
+                      <img src={product?.image} alt={product?.title} className="w-full h-full object-contain mix-blend-multiply" loading="lazy" />
+                    </div>
+                    <div className="leading-5">
+                      <h3 className="text-base font-bold">{truncateString(product?.title)}</h3>
+                      <p className="text-base my-2 flex items-center gap-1 tracking-tight">
+                        <span className="text-xl text-purple-600"><MdStars /></span>
+                        <span className="text-gray-500 font-medium">{product?.rating?.rate} ({product?.rating?.count})</span>
+                      </p>
+                      <p className="text-base font-semibold">${product?.price}</p>
+                    </div>
+                  </Link>
+                ))
+              }
+            </ul>
+          </>
+        }
       </div>
     </section>
   )
