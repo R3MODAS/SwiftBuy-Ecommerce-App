@@ -1,9 +1,11 @@
-"use client";
+"use client"
+
 import Banner from "./components/Banner";
 import Products from "./components/Products";
 
 export default function Home() {
   return (
+    <>
     <div className="mt-20">
       {/* Banner Section */}
       <Banner />
@@ -11,5 +13,6 @@ export default function Home() {
       {/* Product Section */}
       <Products />
     </div>
+    </>
   );
 }

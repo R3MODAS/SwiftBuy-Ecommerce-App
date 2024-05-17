@@ -1,5 +1,3 @@
-"use client";
-
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { MdStars } from "react-icons/md";
@@ -9,7 +7,7 @@ import { Product } from "../utils/types";
 const Products = () => {
   const [Products, setProducts] = useState<Product[]>([])
   const [FilteredProducts, setFilteredProducts] = useState<Product[]>([])
-  const [Loading, setLoading] = useState<boolean>(false)
+  const [Loading, setLoading] = useState<boolean>(true)
   const [SearchProduct, setSearchProduct] = useState<string>("")
   const [ErrorMessage, setErrorMessage] = useState<string>("")
 
@@ -20,20 +18,13 @@ const Products = () => {
 
   const fetchProductData = async () => {
     try {
-      setLoading(true)
       const response = await fetch(`https://fakestoreapi.com/products`)
-      if (!response.ok) {
-        throw new Error(response.statusText)
-      }
-      else {
-        const data: Product[] = await response.json()
-        setProducts(data)
-        setFilteredProducts(data)
-      }
+      const data: Product[] = await response.json()
+      setProducts(data)
+      setFilteredProducts(data)
+      setLoading(false)
     } catch (err: any) {
       console.error(err.message);
-    } finally {
-      setLoading(false)
     }
   }
 
