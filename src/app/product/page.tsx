@@ -1,3 +1,5 @@
+"use client"
+
 import Link from "next/link"
 import { MdStars } from "react-icons/md";
 import { useEffect, useState } from "react"
