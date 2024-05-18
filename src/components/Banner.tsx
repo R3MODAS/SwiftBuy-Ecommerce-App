@@ -1,5 +1,3 @@
-"use client"
-
 const Banner = () => {
   return (
     <section id="banner">

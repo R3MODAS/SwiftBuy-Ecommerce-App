@@ -1,5 +1,5 @@
-import ProductList from "@/components/product-list";
 import Banner from "../components/Banner";
+import Product from "./product/page";
 
 export default function Home() {
   return (
@@ -9,7 +9,7 @@ export default function Home() {
         <Banner />
 
         {/* Products Section */}
-        <ProductList />
+        <Product />
       </div>
     </>
   );
