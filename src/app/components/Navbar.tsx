@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { FaRegUserCircle } from "react-icons/fa";
 import { IoCartOutline } from "react-icons/io5";
+import { navlinks } from "../utils/navlinks";
 
 const Navbar = () => {
     return (
@@ -16,10 +17,11 @@ const Navbar = () => {
                 </div>
                 <div className="flex items-center gap-x-10">
                     <div className="text-base font-medium flex items-center gap-x-8 mr-5">
-                        <Link href="/">Home</Link>
-                        <Link href="/">Shop</Link>
-                        <Link href="/">Blog</Link>
-                        <Link href="/">Contact</Link>
+                        {
+                            navlinks?.map((item) => (
+                                <Link key={item?.id} href={item?.link}>{item?.title}</Link>
+                            ))
+                        }
                     </div>
                     <div className="text-base flex items-center gap-x-4">
                         <Link href="/signup">

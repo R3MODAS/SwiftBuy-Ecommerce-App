@@ -15,3 +15,9 @@ export interface Category {
     id: number;
     category: string;
 }
+
+export interface NavLinks {
+    id: number;
+    title: string;
+    link: string
+}
