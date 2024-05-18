@@ -1,3 +1,5 @@
+"use client"
+
 import Banner from "../components/Banner";
 import Product from "./product/page";
 
