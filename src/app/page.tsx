@@ -1,16 +1,16 @@
-import Banner from "./components/Banner";
-import Products from "./components/Products";
+import ProductList from "@/components/product-list";
+import Banner from "../components/Banner";
 
 export default function Home() {
   return (
     <>
-    <div className="mt-20">
-      {/* Banner Section */}
-      <Banner />
+      <div className="mt-20">
+        {/* Banner Section */}
+        <Banner />
 
-      {/* Product Section */}
-      <Products />
-    </div>
+        {/* Products Section */}
+        <ProductList />
+      </div>
     </>
   );
 }
