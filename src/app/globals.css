@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+body{
+  @apply min-h-screen flex flex-col;
+}
+
 /* ======================
       Loading Page
 ======================= */
