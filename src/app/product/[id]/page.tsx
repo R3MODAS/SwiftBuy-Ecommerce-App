@@ -25,24 +25,22 @@ const ProductDetails = ({ params }: any) => {
     }
   }
 
-  if(isLoading) return <Loader />
+  if (isLoading) return <Loader />
 
   return (
     <div className="container mx-auto my-24">
       {/* Breadcrumbs */}
-      <div className="flex" aria-label="Breadcrumb">
+      <div className="flex text-sm" aria-label="Breadcrumb">
         <ol className="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
           <li className="inline-flex items-center">
-            <Link
-              href="/"
-              className="inline-flex items-center text-sm font-medium hover:text-gray-500 text-gray-400 capitalize">
+            <Link href="/" className="inline-flex items-center font-medium hover:text-purple-600 text-purple-500 capitalize">
               Home
             </Link>
           </li>
           <li>
             <div className="flex items-center">
               <svg
-                className="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1"
+                className="rtl:rotate-180 w-3 h-3 text-purple-500 mx-1"
                 aria-hidden="true"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -58,7 +56,7 @@ const ProductDetails = ({ params }: any) => {
               </svg>
               <Link
                 href={`/product/${productDetails?.id}`}
-                className="ms-1 text-sm font-medium hover:text-gray-500 text-gray-400 capitalize">
+                className="ms-1 font-medium hover:text-purple-600 text-purple-500 capitalize">
                 {productDetails?.title}
               </Link>
             </div>

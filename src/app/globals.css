@@ -85,11 +85,11 @@ body{
 }
 
 .product-container {
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  @apply flex flex-wrap gap-10 justify-center items-center my-20;
 }
 
 .product-card {
-  @apply w-72 p-3 h-[350px] cursor-pointer hover:scale-95 transition-all bg-gray-100 rounded-xl shadow-md;
+  @apply w-[350px] p-3 h-full cursor-pointer hover:scale-95 transition-all bg-purple-100 rounded-xl shadow-md;
 }
 
 .category-btn {
