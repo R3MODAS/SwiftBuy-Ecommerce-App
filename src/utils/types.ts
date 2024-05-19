@@ -19,6 +19,6 @@ export interface Products {
     stock: number;
     brand: string;
     category: string;
-    thumbnail: [string];
-    images: [string];
+    thumbnail: string[];
+    images: string[];
 }

@@ -1,6 +1,8 @@
 "use client"
 
 import Loader from "@/components/Loader"
+import { addToCart } from "@/utils/store/features/cartSlice"
+import { useAppDispatch } from "@/utils/store/hooks"
 import Link from "next/link"
 import { useEffect, useState } from "react"
 
@@ -8,6 +10,7 @@ const ProductDetails = ({ params }: any) => {
   const { id } = params
   const [productDetails, setProductDetails] = useState<any>(null)
   const [isLoading, setIsLoading] = useState<boolean>(true)
+  const dispatch = useAppDispatch()
 
   useEffect(() => {
     fetchProductDetails()
@@ -23,6 +26,10 @@ const ProductDetails = ({ params }: any) => {
       console.log(err.message)
       setIsLoading(false)
     }
+  }
+
+  const handleAddToCart = () => {
+    dispatch(addToCart(productDetails?.id))
   }
 
   if (isLoading) return <Loader />
@@ -75,7 +82,7 @@ const ProductDetails = ({ params }: any) => {
             <p className="text-base font-medium py-2">{productDetails?.description}</p>
             <p className="font-bold text-2xl pb-3">${productDetails?.price}</p>
             <div>
-              <button className="common-btn">Add to Cart</button>
+              <button onClick={handleAddToCart} className="common-btn">Add to Cart</button>
             </div>
           </div>
         </div>
