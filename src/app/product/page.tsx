@@ -5,12 +5,14 @@ import { MdStars } from "react-icons/md";
 import { useEffect, useState } from "react"
 import { categories } from "@/utils/categories";
 import { Products } from "@/utils/types";
+import Loader from "@/components/Loader";
 
 const Product = () => {
-  const [Products, setProducts] = useState<Products[]>([])
-  const [FilteredProducts, setFilteredProducts] = useState<Products[]>([])
-  const [SearchProduct, setSearchProduct] = useState<string>("")
-  const [ErrorMessage, setErrorMessage] = useState<string>("")
+  const [products, setProducts] = useState<Products[]>([])
+  const [filteredProducts, setFilteredProducts] = useState<Products[]>([])
+  const [searchText, setSearchText] = useState<string>("")
+  const [errorMessage, setErrorMessage] = useState<string>("")
+  const [isLoading, setIsLoading] = useState<boolean>(true)
 
   // ============== Fetch the Products ==============
   useEffect(() => {
@@ -23,54 +25,50 @@ const Product = () => {
       const data = await response.json()
       setProducts(data?.products)
       setFilteredProducts(data?.products)
+      setIsLoading(false)
     } catch (err: any) {
       console.log(err.message)
+      setErrorMessage("Failed to load products.")
+      setIsLoading(false)
     }
   }
 
   // ============== Filter Functionality ==============
   const handleFilterProduct = (categoryName: string) => {
-    setFilteredProducts(Products?.filter(product => product?.category !== categoryName))
+    const filtered = products?.filter(product => product?.category?.toLowerCase() === categoryName?.toLowerCase())
+    setFilteredProducts(filtered)
   }
 
   const handleResetFilter = () => {
-    setFilteredProducts(Products)
+    setFilteredProducts(products)
   }
 
   // ============== Search Functionality ==============
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      handleSearchProduct()
-    }, 800)
-
-    return () => {
-      clearTimeout(timer)
-    }
-  }, [SearchProduct])
-
   const handleSearchProduct = () => {
-    if (SearchProduct !== "") {
-      const filteredProducts = Products?.filter(product => product?.title?.toLowerCase()?.includes(SearchProduct?.toLowerCase()))
-      setFilteredProducts(filteredProducts)
-      setErrorMessage("")
-
-      if (filteredProducts?.length === 0) {
-        setErrorMessage(`Sorry, we couldn't find any results for "${SearchProduct}"`)
-      }
-    }
-    else {
-      setErrorMessage("")
-      setFilteredProducts(Products)
+    if (searchText) {
+      const filtered = products.filter(product =>
+        product.title.toLowerCase().includes(searchText.toLowerCase())
+      );
+      setFilteredProducts(filtered);
+      setErrorMessage(filtered.length ? "" : `Sorry, we couldn't find any results for "${searchText}"`);
+    } else {
+      setFilteredProducts(products);
+      setErrorMessage("");
     }
   }
 
   const handleResetSearch = () => {
-    setFilteredProducts(Products)
-    setSearchProduct("")
+    setFilteredProducts(products)
+    setSearchText("")
+    setErrorMessage("")
+  }
+
+  if (isLoading) {
+    return <Loader />
   }
 
   return (
-    <div className="container mx-auto my-10">
+    <div className="container mx-auto mt-10">
       <h2 className="text-center font-bold text-4xl pt-5 pb-16">Obsessed? We Are Too! Shop Now</h2>
 
       {/* Filter Products */}
@@ -89,18 +87,21 @@ const Product = () => {
           </button>
         </div>
         <div className="w-96 relative">
-          <input value={SearchProduct} onChange={e => setSearchProduct(e.target.value)} type="text" placeholder="Search for Products..." className="border border-gray-300 placeholder:text-gray-500 px-4 py-3 w-full relative" />
+          <input value={searchText} onChange={e => {
+            setSearchText(e.target.value)
+            handleSearchProduct()
+          }} type="text" placeholder="Search for Products..." className="border border-gray-300 placeholder:text-gray-500 px-4 py-3 w-full relative" />
           {
-            SearchProduct && <button onClick={handleResetSearch} className="absolute right-4 top-1/2 -translate-y-1/2 text-sm text-purple-600 cursor-pointer">Cancel</button>
+            searchText && <button onClick={handleResetSearch} className="absolute right-4 top-1/2 -translate-y-1/2 text-sm text-purple-600 cursor-pointer">Cancel</button>
           }
         </div>
       </div>
 
-      <div className="product-container">
-        {ErrorMessage && <h3 className="text-2xl font-bold tracking-tight">{ErrorMessage}</h3>}
+      <div className={`product-container grid gap-y-10 place-items-center my-20 ${filteredProducts?.length === 0 ? "min-h-64" : "h-auto"}`}>
+        {errorMessage && <h3 className="text-2xl font-bold tracking-tight">{errorMessage}</h3>}
         {
-          Products && Products.length > 0 ?
-            FilteredProducts?.map((product: any) => (
+          (products && products?.length > 0) ?
+            filteredProducts?.map((product) => (
               <Link href={`/product/${product?.id}`} key={product?.id} className="product-card">
                 <div className="w-full h-44 mb-4">
                   <img src={product?.images[0]} alt={product?.title} className="w-full h-full object-cover object-top rounded-xl" loading="lazy" />

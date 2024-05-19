@@ -1,11 +1,13 @@
 "use client"
 
+import Loader from "@/components/Loader"
 import Link from "next/link"
 import { useEffect, useState } from "react"
 
 const ProductDetails = ({ params }: any) => {
   const { id } = params
   const [productDetails, setProductDetails] = useState<any>(null)
+  const [isLoading, setIsLoading] = useState<boolean>(true)
 
   useEffect(() => {
     fetchProductDetails()
@@ -16,11 +18,14 @@ const ProductDetails = ({ params }: any) => {
       const response = await fetch(`https://dummyjson.com/products/${id}`)
       const data = await response.json()
       setProductDetails(data)
+      setIsLoading(false)
     } catch (err: any) {
       console.log(err.message)
-      throw new Error(err.message)
+      setIsLoading(false)
     }
   }
+
+  if(isLoading) return <Loader />
 
   return (
     <div className="container mx-auto my-24">

@@ -81,7 +81,6 @@
 }
 
 .product-container {
-  @apply grid gap-y-10 place-items-center my-20;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 }
 
