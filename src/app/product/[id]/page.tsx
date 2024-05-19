@@ -2,16 +2,19 @@
 
 import Loader from "@/components/Loader"
 import { addToCart } from "@/utils/store/features/cartSlice"
-import { useAppDispatch } from "@/utils/store/hooks"
+import { useAppDispatch, useAppSelector } from "@/utils/store/hooks"
 import Link from "next/link"
 import { useEffect, useState } from "react"
+import toast from 'react-hot-toast';
+
 
 const ProductDetails = ({ params }: any) => {
   const { id } = params
   const [productDetails, setProductDetails] = useState<any>(null)
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const dispatch = useAppDispatch()
-  
+  const cartItems = useAppSelector(store => store.cart.items)
+
   useEffect(() => {
     fetchProductDetails()
   }, [])
@@ -29,7 +32,14 @@ const ProductDetails = ({ params }: any) => {
   }
 
   const handleAddToCart = () => {
-    dispatch(addToCart(productDetails))
+    const isItemInCart = cartItems?.some((item: any) => item?.id === productDetails?.id)
+    if (isItemInCart) {
+      toast.error("Already added to the Cart")
+    } else {
+      dispatch(addToCart(productDetails))
+      toast.success("Added to the Cart")
+    }
+
   }
 
   if (isLoading) return <Loader />

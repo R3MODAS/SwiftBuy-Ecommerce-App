@@ -1,20 +1,22 @@
 'use client'
 
-import { addToCart } from "@/utils/store/features/cartSlice"
-import { AppStore, makeStore } from "@/utils/store/store"
+import { makeStore, AppStore } from "@/utils/store/store";
 import { ReactNode, useRef } from "react"
 import { Provider } from "react-redux"
+import { PersistGate } from 'redux-persist/integration/react'
 
 const StoreProvider = ({ children }: { children: ReactNode }) => {
     const storeRef = useRef<AppStore>()
     if (!storeRef.current) {
         storeRef.current = makeStore()
-        // Add initial state
-        // storeRef.current.dispatch(addToCart("testproductId"))
     }
 
     return (
-        <Provider store={storeRef.current}>{children}</Provider>
+        <Provider store={storeRef.current}>
+            <PersistGate loading={null} persistor={storeRef.current.__persistor}>
+                {children}
+            </PersistGate>
+        </Provider>
     )
 }
 
