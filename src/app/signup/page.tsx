@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 
-const page = () => {
+const Signup = () => {
   return (
     <div className="container mx-auto my-10">
       <div className="flex flex-col justify-center min-h-screen max-w-md mx-auto sm:px-0">
@@ -78,4 +78,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Signup
