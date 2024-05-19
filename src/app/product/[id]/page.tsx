@@ -11,7 +11,7 @@ const ProductDetails = ({ params }: any) => {
   const [productDetails, setProductDetails] = useState<any>(null)
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const dispatch = useAppDispatch()
-
+  
   useEffect(() => {
     fetchProductDetails()
   }, [])
@@ -29,7 +29,7 @@ const ProductDetails = ({ params }: any) => {
   }
 
   const handleAddToCart = () => {
-    dispatch(addToCart(productDetails?.id))
+    dispatch(addToCart(productDetails))
   }
 
   if (isLoading) return <Loader />
