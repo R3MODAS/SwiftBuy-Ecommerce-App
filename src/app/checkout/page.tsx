@@ -5,9 +5,9 @@ import { useAppSelector } from "@/utils/store/hooks"
 
 const Checkout = () => {
 
-  const { items } = useAppSelector(store => store.cart)
+  const { items, total } = useAppSelector(store => store.cart)
 
-  const total = items?.reduce((acc: any,curr: any) => acc + curr?.price , 0)
+  // const total = items?.reduce((acc: any,curr: any) => acc + curr?.price , 0)
 
   return (
     <section className='w-[90vw] mx-auto max-w-3xl my-24'>

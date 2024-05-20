@@ -8,10 +8,12 @@ interface CartItem {
 
 interface CartState {
   items: CartItem[];
+  total: number;
 }
 
 const initialState: CartState = {
-  items: []
+  items: [],
+  total: 0
 }
 
 export const cartSlice = createSlice({
@@ -20,6 +22,7 @@ export const cartSlice = createSlice({
   reducers: {
     addToCart: (state, action) => {
       state.items = [...state.items, action.payload]
+      state.total = action.payload.price * action.payload.quantity
     },
     increaseItemQuantity: (state, action) => {
       const itemId = action.payload;
@@ -28,21 +31,23 @@ export const cartSlice = createSlice({
       if (index !== -1) {
         state.items[index] = {
           ...state.items[index],
-          quantity: state.items[index].quantity + 1,
-          price: state.items[index].price * (state.items[index].quantity + 1)
+          quantity: state.items[index].quantity + 1
         };
-        console.log(state.items[index])
+        state.total = state.items[index].price * (state.items[index].quantity + 1)
       }
     },
     decreaseItemQuantity: (state, action) => {
-      const itemId = action.payload
-      const findItem: any = state.items?.find((item: any) => item?.id === itemId)
-      if (findItem?.quantity >= 1) {
-        findItem!.quantity--
-        console.log(current(findItem))
-      }
-      else if (findItem?.quantity < 1) {
-        console.log("Limit")
+      const itemId = action.payload;
+      const index = state.items.findIndex((item: any) => item.id === itemId);
+
+      if (index !== -1) {
+        const item = state.items[index];
+        if (item.quantity > 1) {
+
+        }
+        else {
+          state.items.splice(index, 1);
+        }
       }
     }
   },
