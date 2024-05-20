@@ -1,6 +1,5 @@
 "use client"
 
-import Loader from "@/components/Loader"
 import { addToCart } from "@/utils/store/features/cartSlice"
 import { useAppDispatch, useAppSelector } from "@/utils/store/hooks"
 import { Products } from "@/utils/types"
@@ -11,7 +10,6 @@ import toast from 'react-hot-toast';
 const ProductDetails = ({ params }: any) => {
   const { id } = params
   const [productDetails, setProductDetails] = useState<Products | null>(null)
-  const [isLoading, setIsLoading] = useState<boolean>(true)
   const dispatch = useAppDispatch()
   const cartItems = useAppSelector(store => store.cart.items)
 
@@ -24,10 +22,8 @@ const ProductDetails = ({ params }: any) => {
       const response = await fetch(`https://dummyjson.com/products/${id}`)
       const data = await response.json()
       setProductDetails(data)
-      setIsLoading(false)
     } catch (err: any) {
       console.log(err.message)
-      setIsLoading(false)
     }
   }
 
@@ -36,13 +32,11 @@ const ProductDetails = ({ params }: any) => {
     if (isItemInCart) {
       toast.error("Already added to the Cart")
     } else {
-      dispatch(addToCart({...productDetails, quantity: 1}))
+      dispatch(addToCart({ ...productDetails, quantity: 1 }))
       toast.success("Added to the Cart")
     }
 
   }
-
-  if (isLoading) return <Loader />
 
   return (
     <div className="container mx-auto my-24 px-3">
