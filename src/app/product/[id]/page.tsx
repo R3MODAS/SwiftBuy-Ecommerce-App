@@ -36,7 +36,7 @@ const ProductDetails = ({ params }: any) => {
     if (isItemInCart) {
       toast.error("Already added to the Cart")
     } else {
-      dispatch(addToCart(productDetails))
+      dispatch(addToCart({...productDetails, quantity: 1}))
       toast.success("Added to the Cart")
     }
 

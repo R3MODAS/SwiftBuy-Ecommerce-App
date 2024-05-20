@@ -1,11 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 interface CartState {
-  items: object[]
+  items: object[];
+  total: number;
 }
 
 const initialState: CartState = {
-  items: []
+  items: [],
+  total: 0
 }
 
 export const cartSlice = createSlice({
@@ -14,6 +16,7 @@ export const cartSlice = createSlice({
   reducers: {
     addToCart: (state, action) => {
       state.items = [...state.items, action.payload]
+      state.total = action.payload.price
     }
   },
 })

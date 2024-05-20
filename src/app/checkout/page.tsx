@@ -1,31 +1,47 @@
 "use client"
 
+import CartItem from "@/components/CartItem"
 import { useAppSelector } from "@/utils/store/hooks"
 
 const Checkout = () => {
 
-  const cartItems = useAppSelector(store => store.cart.items)
+  const { items, quantity, total } = useAppSelector(store => store.cart)
 
   return (
-    <div className="my-24 container mx-auto flex flex-col justify-center items-center min-h-screen">
-      <div className="min-w-80 min-h-3 bg-white shadow-lg px-8 rounded-md">
-        {
-          cartItems?.map((item: any) => (
-            <div key={item?.id} className="flex justify-center p-5 items-start gap-x-5">
-              <div className="w-24 h-20 flex-2">
-                <img className="w-full h-full object-cover rounded-lg" src={item?.thumbnail} alt={item?.title} />
-              </div>
-              <div className="flex-1">
-                <h3>{item?.title}</h3>
-              </div>
-              <div className="flex-3">
-                <p>${item?.price}</p>
-              </div>
+    <section className='w-[90vw] mx-auto max-w-3xl my-24'>
+      <h2 className="text-center text-3xl font-bold">Cart Items</h2>
+      {
+        (items && items?.length !== 0) ?
+          <>
+            <div>
+              {items.map((item: any) => {
+                return <CartItem key={item.id} {...item} />;
+              })}
             </div>
-          ))
-        }
-      </div>
-    </div>
+            <footer>
+              <hr />
+              <div className='cart-total'>
+                {
+                  total ?
+                    <h4>
+                      total <span>${total.toFixed(2)}</span>
+                    </h4> :
+                    <h4>
+                      total <span>${total}</span>
+                    </h4>
+                }
+              </div>
+              <button className='btn clear-btn'>
+                clear cart
+              </button>
+            </footer>
+          </> :
+          <div className="my-10">
+              <h2 className="text-center">Cart is Empty</h2>
+          </div>
+      }
+
+    </section>
   )
 }
 
