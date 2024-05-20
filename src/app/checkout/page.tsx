@@ -13,7 +13,7 @@ const Checkout = () => {
       {
         (items && items?.length !== 0) ?
           <>
-            <div>
+            <div className="my-10">
               {items.map((item: any) => {
                 return <CartItem key={item.id} {...item} />;
               })}
