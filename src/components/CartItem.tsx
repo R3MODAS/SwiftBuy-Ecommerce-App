@@ -2,10 +2,11 @@
 
 import { increaseItemQuantity, decreaseItemQuantity, deleteItemFromCart } from "@/utils/store/features/cartSlice";
 import { useAppDispatch } from "@/utils/store/hooks";
+import { Item } from "@/utils/types";
 import { FiMinusCircle, FiPlusCircle } from "react-icons/fi";
 import { IoTrashOutline } from "react-icons/io5";
 
-const CartItem = (item: any) => {
+const CartItem = (item: Item) => {
   const dispatch = useAppDispatch()
 
   const handleIncreaseItemQuantity = (id: number) => {

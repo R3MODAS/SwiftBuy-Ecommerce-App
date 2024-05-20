@@ -1,22 +1,8 @@
+import { Item } from '@/utils/types';
 import { createSlice } from '@reduxjs/toolkit'
 
-interface CartItem {
-  id: number;
-  title: string;
-  description: string;
-  price: number;
-  discountPercentage: number;
-  rating: number;
-  stock: number;
-  brand: string;
-  category: string;
-  thumbnail: string;
-  images: string[];
-  quantity: number;
-}
-
 interface CartState {
-  items: CartItem[];
+  items: Item[];
   total: number;
 }
 
@@ -36,7 +22,7 @@ export const cartSlice = createSlice({
     },
     increaseItemQuantity: (state, action) => {
       const itemId = action.payload
-      const itemIndex = state.items.findIndex((item: CartItem) => item.id === itemId)
+      const itemIndex = state.items.findIndex((item: Item) => item.id === itemId)
 
       if (itemIndex !== -1) {
         state.items[itemIndex].quantity++
@@ -46,7 +32,7 @@ export const cartSlice = createSlice({
     },
     decreaseItemQuantity: (state, action) => {
       const itemId = action.payload
-      const itemIndex = state.items.findIndex((item: CartItem) => item.id === itemId)
+      const itemIndex = state.items.findIndex((item: Item) => item.id === itemId)
 
       if (itemIndex !== -1) {
         const item = state.items[itemIndex]
@@ -67,13 +53,13 @@ export const cartSlice = createSlice({
     },
     deleteItemFromCart: (state, action) => {
       const itemId = action.payload
-      state.items = state.items.filter((item: CartItem) => item.id !== itemId)
+      state.items = state.items.filter((item: Item) => item.id !== itemId)
       state.total = calculateTotal(state.items)
     }
   },
 })
 
-const calculateTotal = (cartItems: CartItem[]) => {
+const calculateTotal = (cartItems: Item[]) => {
   let total = 0
   for (let item of cartItems) {
     total += item.price * item.quantity

@@ -3,6 +3,7 @@
 import CartItem from "@/components/CartItem"
 import { clearCart } from "@/utils/store/features/cartSlice"
 import { useAppDispatch, useAppSelector } from "@/utils/store/hooks"
+import { Item } from "@/utils/types"
 import Link from "next/link"
 
 const Checkout = () => {
@@ -16,7 +17,7 @@ const Checkout = () => {
           <div className="mt-7">
             <h2 className="text-center text-2xl font-bold">Cart Items</h2>
             <div className="py-5">
-            {items.map((item: any) => {
+            {items.map((item: Item) => {
               return <CartItem key={item.id} {...item} />
             })}
             </div>
