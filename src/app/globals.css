@@ -79,23 +79,19 @@ body{
       Home Page
 ======================= */
 #banner {
-  height: 800px;
-  background: url("../../public/assets/banner.jpg") no-repeat center center;
+  background: url("../../public/assets/banner.jpg") no-repeat;
   background-size: cover;
+  @apply bg-center lg:h-[800px] h-[450px];
 }
 
 .product-container {
-  @apply flex flex-wrap gap-10 justify-center items-center my-20;
+  @apply flex flex-wrap gap-10 justify-center items-center mb-20;
 }
 
 .product-card {
-  @apply w-[350px] p-3 h-full cursor-pointer hover:scale-95 transition-all bg-purple-100 rounded-xl shadow-md;
-}
-
-.category-btn {
-  @apply bg-black text-white px-4 py-2.5 capitalize text-base rounded-md font-medium transition-colors hover:bg-purple-600 flex items-center justify-center relative;
+  @apply w-64 lg:w-[340px] p-3 h-full cursor-pointer hover:scale-95 transition-all bg-purple-100 rounded-xl shadow-md;
 }
 
 .common-btn {
-  @apply bg-purple-600 text-white px-6 py-3 rounded-md font-medium;
+  @apply bg-purple-600 text-white px-4 py-2 lg:px-6 lg:py-3 rounded-md font-medium lg:text-base text-sm;
 }

@@ -14,8 +14,8 @@ const Checkout = () => {
       {
         (items && items?.length !== 0) ?
           <div className="mt-7">
-            <h2 className="text-center text-3xl font-bold">Cart Items</h2>
-            <div className="pb-5">
+            <h2 className="text-center text-2xl font-bold">Cart Items</h2>
+            <div className="py-5">
             {items.map((item: any) => {
               return <CartItem key={item.id} {...item} />
             })}
@@ -23,7 +23,7 @@ const Checkout = () => {
             <hr />
             <div className="text-center pt-5">
               <div className="text-xl mb-3">
-                <p>Total: <span className="font-bold">${total?.toFixed(2)}</span></p>
+                <p className="font-medium">Total: <span className="font-bold">${total?.toFixed(2)}</span></p>
               </div>
               <div className="flex items-center justify-center gap-x-5">
               <button onClick={() => dispatch(clearCart())} className="common-btn">Clear Cart</button>
@@ -33,8 +33,8 @@ const Checkout = () => {
           </div> :
           <div className="text-center flex flex-col justify-center items-center">
             <img className="h-72 mx-auto" src="./assets/empty-cart-illustration.gif" alt="empty-cart" />
-            <h2 className="text-xl font-bold">Your cart is empty</h2>
-            <p className="text-sm pt-1 mb-6">You can go to home page to view more products</p>
+            <h2 className="text-xl font-bold mt-3">Your cart is empty</h2>
+            <p className="text-sm md:pt-1 pt-0.5 lg:mb-8 mb-5">You can go to home page to view more products</p>
             <div>
               <Link href="/" className="common-btn">Home</Link>
             </div>

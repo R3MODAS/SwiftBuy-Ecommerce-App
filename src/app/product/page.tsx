@@ -76,28 +76,33 @@ const Product = () => {
   }
 
   return (
-    <div className="container mx-auto mt-10">
-      <h2 className="text-center font-bold text-4xl pt-5 pb-16">Obsessed? We Are Too! Shop Now</h2>
+    <div className="container mx-auto mt-10 xl-px-2 px-5">
+      <h2 className="lg:text-left text-center font-bold text-2xl lg:text-3xl">Obsessed? We Are Too! Shop Now</h2>
 
       {/* Filter Products */}
-      <div className="flex items-center justify-between">
-        <div className="flex items-center justify-center gap-x-7">
+      <div className="flex flex-wrap items-center justify-center xl:justify-between xl:gap-0 gap-5 xl:mt-10 mb-10 mt-6">
+        <div className="flex flex-wrap items-center justify-center lg:gap-7 gap-2">
           {
             categories?.map((item) => (
-              <button className="category-btn"
-                key={item?.id} onClick={() => handleFilterProduct(item?.category)}>
-                {item?.category}
+              <button key={item?.id} onClick={() => handleFilterProduct(item?.category)} className="flex items-center justify-center capitalize lg:text-base text-sm font-normal">
+                <div className="rounded-3xl px-3.5 py-2 m-1 overflow-hidden relative group cursor-pointer border-2 font-medium border-purple-600 text-purple-600">
+                  <span className="absolute w-64 h-0 transition-all duration-500 origin-center rotate-45 -translate-x-20 bg-purple-600 top-1/2 group-hover:h-64 group-hover:-translate-y-32 ease" />
+                  <span className="relative text-purple-600 transition duration-500 group-hover:text-white ease">{item?.category}</span>
+                </div>
               </button>
             ))
           }
-          <button className="category-btn" onClick={handleResetFilter}>
-            Reset Filters
+          <button className="flex items-center justify-center capitalize lg:text-base text-sm font-normal" onClick={handleResetFilter}>
+            <div className="rounded-3xl px-3.5 py-2 m-1 overflow-hidden relative group cursor-pointer border-2 font-medium border-purple-600 text-purple-600">
+              <span className="absolute w-64 h-0 transition-all duration-500 origin-center rotate-45 -translate-x-20 bg-purple-600 top-1/2 group-hover:h-64 group-hover:-translate-y-32 ease" />
+              <span className="relative text-purple-600 transition duration-500 group-hover:text-white ease">Reset Filters</span>
+            </div>
           </button>
         </div>
-        <div className="w-96 relative">
+        <div className="w-[350px] relative text-sm sm:px-0 px-2">
           <input value={searchText} onChange={e => {
             setSearchText(e.target.value)
-          }} type="text" placeholder="Search for Products..." className="border border-gray-300 placeholder:text-gray-500 px-4 py-3 w-full relative" />
+          }} type="text" placeholder="Search for Products..." className="border border-purple-600 placeholder:text-gray-500 px-4 py-3 w-full relative rounded-3xl focus:border-purple-600 active:border-purple-600" />
           {
             searchText && <button onClick={handleResetSearch} className="absolute right-4 top-1/2 -translate-y-1/2 text-sm text-purple-600 cursor-pointer">Cancel</button>
           }
@@ -110,7 +115,7 @@ const Product = () => {
           (products && products?.length > 0) ?
             filteredProducts?.map((product) => (
               <Link href={`/product/${product?.id}`} key={product?.id} className="product-card">
-                <div className="w-full h-52 mb-4">
+                <div className="w-full h-36 lg:h-52 lg:mb-4 mb-2">
                   <img src={product?.images[0]} alt={product?.title} className="w-full h-full object-cover object-top rounded-xl" loading="lazy" />
                 </div>
                 <div className="leading-5">

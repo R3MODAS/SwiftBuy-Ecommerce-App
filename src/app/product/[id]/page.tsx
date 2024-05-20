@@ -45,7 +45,7 @@ const ProductDetails = ({ params }: any) => {
   if (isLoading) return <Loader />
 
   return (
-    <div className="container mx-auto my-24">
+    <div className="container mx-auto my-24 px-3">
       {/* Breadcrumbs */}
       <div className="flex text-sm" aria-label="Breadcrumb">
         <ol className="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
@@ -83,13 +83,13 @@ const ProductDetails = ({ params }: any) => {
 
       {/* Product Details Section */}
       <section className="mt-10">
-        <div className="flex justify-center items-center gap-x-10">
-          <div className="w-1/2">
-            <img className="w-full" src={productDetails?.thumbnail} alt={productDetails?.title} />
+        <div className="flex md:flex-row flex-col justify-center items-center md:gap-10 gap-8">
+          <div className="md:w-1/2 w-full">
+            <img className="md:w-full mx-auto" src={productDetails?.thumbnail} alt={productDetails?.title} />
           </div>
-          <div className="flex flex-col text-left w-1/2">
-            <h2 className="text-3xl font-bold">{productDetails?.title}</h2>
-            <p className="text-base font-medium py-2">{productDetails?.description}</p>
+          <div className="flex flex-col text-center md:text-left md:w-1/2">
+            <h2 className="md:text-3xl text-2xl font-bold">{productDetails?.title}</h2>
+            <p className="md:text-base text-sm md:w-auto md:mx-0 mx-auto font-medium md:py-2 py-1">{productDetails?.description}</p>
             <p className="font-bold text-2xl pb-3">${productDetails?.price}</p>
             <div>
               <button onClick={handleAddToCart} className="common-btn">Add to Cart</button>

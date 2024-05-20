@@ -13,7 +13,7 @@ const Navbar = () => {
 
     return (
         <header className="h-20 flex items-center fixed left-0 right-0 w-full top-0 bg-white shadow-md z-10">
-            <div className="container mx-auto flex justify-between items-center sm:px-0 px-5">
+            <div className="container mx-auto flex justify-between items-center px-5">
                 <div>
                     <Link href="/" className="w-16 font-black text-xl uppercase">
                         <span>Swift</span>
