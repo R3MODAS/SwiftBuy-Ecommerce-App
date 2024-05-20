@@ -32,7 +32,7 @@ const Checkout = () => {
             </div>
           </div> :
           <div className="text-center flex flex-col justify-center items-center">
-            <img className="h-72 mx-auto" src="./assets/empty-cart-illustration.gif" alt="empty-cart" />
+            <img className="h-72 mx-auto" src="./assets/empty-cart.gif" alt="empty-cart" />
             <h2 className="text-xl font-bold mt-3">Your cart is empty</h2>
             <p className="text-sm md:pt-1 pt-0.5 lg:mb-8 mb-5">You can go to home page to view more products</p>
             <div>

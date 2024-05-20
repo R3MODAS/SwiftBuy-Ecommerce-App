@@ -4,12 +4,19 @@ import Link from "next/link";
 import { FaRegUserCircle } from "react-icons/fa";
 import { navlinks } from "../utils/navlinks";
 import { IoCartOutline } from "react-icons/io5";
-import { useAppSelector } from "@/utils/store/hooks";
+import { useAppDispatch, useAppSelector } from "@/utils/store/hooks";
 import { RiMenu3Fill } from "react-icons/ri";
+import { toggleSidebar } from "@/utils/store/features/toggleSlice";
 
 const Navbar = () => {
 
     const cartItems = useAppSelector(store => store.cart.items)
+    const dispatch = useAppDispatch()
+
+    const handleToggleSidebar = () => {
+        dispatch(toggleSidebar())
+        document.body.classList.add("overflow-hidden")
+    }
 
     return (
         <header className="h-20 flex items-center fixed left-0 right-0 w-full top-0 bg-white shadow-md z-10">
@@ -39,7 +46,7 @@ const Navbar = () => {
                     </div>
                 </div>
                 <div className="text-2xl sm:hidden flex items-center gap-x-3">
-                    <button>
+                    <button onClick={handleToggleSidebar}>
                         <RiMenu3Fill />
                     </button>
                     <Link href="/checkout" className="relative">

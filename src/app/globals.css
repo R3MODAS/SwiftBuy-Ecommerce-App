@@ -68,14 +68,6 @@ body{
 }
 
 /* ======================
-      Error Page
-======================= */
-.error-bg {
-  background: url("../../public/assets/error-page.gif") no-repeat center;
-  height: 350px;
-}
-
-/* ======================
       Home Page
 ======================= */
 #banner {

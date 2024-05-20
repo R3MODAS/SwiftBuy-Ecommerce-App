@@ -7,7 +7,6 @@ import Link from "next/link"
 import { useEffect, useState } from "react"
 import toast from 'react-hot-toast';
 
-
 const ProductDetails = ({ params }: any) => {
   const { id } = params
   const [productDetails, setProductDetails] = useState<any>(null)
