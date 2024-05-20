@@ -1,45 +1,43 @@
 "use client"
 
 import CartItem from "@/components/CartItem"
-import { useAppSelector } from "@/utils/store/hooks"
+import { clearCart } from "@/utils/store/features/cartSlice"
+import { useAppDispatch, useAppSelector } from "@/utils/store/hooks"
+import Link from "next/link"
 
 const Checkout = () => {
-
   const { items, total } = useAppSelector(store => store.cart)
-
-  // const total = items?.reduce((acc: any,curr: any) => acc + curr?.price , 0)
+  const dispatch = useAppDispatch()
 
   return (
-    <section className='w-[90vw] mx-auto max-w-3xl my-24'>
-      <h2 className="text-center text-3xl font-bold">Cart Items</h2>
+    <section className='w-[90vw] mx-auto max-w-3xl my-20'>
       {
         (items && items?.length !== 0) ?
-          <>
-            <div className="my-10">
-              {items.map((item: any) => {
-                return <CartItem key={item.id} {...item} />;
-              })}
+          <div className="mt-7">
+            <h2 className="text-center text-3xl font-bold">Cart Items</h2>
+            <div className="pb-5">
+            {items.map((item: any) => {
+              return <CartItem key={item.id} {...item} />
+            })}
             </div>
-            <footer>
-              <hr />
-              <div className='cart-total'>
-                {
-                  total ?
-                    <h4>
-                      total <span>${total.toFixed(2)}</span>
-                    </h4> :
-                    <h4>
-                      total <span>${total}</span>
-                    </h4>
-                }
+            <hr />
+            <div className="text-center pt-5">
+              <div className="text-xl mb-3">
+                <p>Total: <span className="font-bold">${total?.toFixed(2)}</span></p>
               </div>
-              <button className='btn clear-btn'>
-                clear cart
-              </button>
-            </footer>
-          </> :
-          <div className="my-10">
-              <h2 className="text-center">Cart is Empty</h2>
+              <div className="flex items-center justify-center gap-x-5">
+              <button onClick={() => dispatch(clearCart())} className="common-btn">Clear Cart</button>
+              <button className="common-btn">Buy Now</button>
+              </div>
+            </div>
+          </div> :
+          <div className="text-center flex flex-col justify-center items-center">
+            <img className="h-72 mx-auto" src="./assets/empty-cart-illustration.gif" alt="empty-cart" />
+            <h2 className="text-xl font-bold">Your cart is empty</h2>
+            <p className="text-sm pt-1 mb-6">You can go to home page to view more products</p>
+            <div>
+              <Link href="/" className="common-btn">Home</Link>
+            </div>
           </div>
       }
 

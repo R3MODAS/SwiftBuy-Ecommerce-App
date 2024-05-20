@@ -1,15 +1,10 @@
 "use client"
 
-import { increaseItemQuantity, decreaseItemQuantity } from "@/utils/store/features/cartSlice";
-import { useAppDispatch, useAppSelector } from "@/utils/store/hooks";
-import { useState } from "react";
+import { increaseItemQuantity, decreaseItemQuantity, deleteItemFromCart } from "@/utils/store/features/cartSlice";
+import { useAppDispatch } from "@/utils/store/hooks";
 import { FiMinusCircle, FiPlusCircle } from "react-icons/fi";
-import { MdDeleteOutline } from "react-icons/md";
 
 const CartItem = (item: any) => {
-  // console.log(item)
-  const cartItems = useAppSelector(store => store.cart.items)
-  const [quantity, setQuantity] = useState<number>(1)
   const dispatch = useAppDispatch()
 
   const handleIncreaseItemQuantity = (id: number) => {
@@ -20,6 +15,10 @@ const CartItem = (item: any) => {
     dispatch(decreaseItemQuantity(id))
   }
 
+  const handleDeleteItem = (id: number) => {
+    dispatch(deleteItemFromCart(id))
+  }
+
   return (
     <div className="flex items-center gap-5 mb-5">
       <div className="w-40 h-24">
@@ -27,7 +26,8 @@ const CartItem = (item: any) => {
       </div>
       <div className="flex-1">
         <h3 className="font-bold">{item?.title}</h3>
-        <span className="text-sm">${item?.price}</span>
+        <p className="text-sm">${item?.price}</p>
+        <button onClick={() => handleDeleteItem(item?.id)} className="text-sm">Delete</button>
       </div>
       <div className="text-xl flex items-center gap-2">
         <button onClick={() => handleDecreaseItemQuantity(item?.id)}>

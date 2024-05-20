@@ -21,20 +21,19 @@ export const cartSlice = createSlice({
   initialState: initialState,
   reducers: {
     addToCart: (state, action) => {
-      state.items = [...state.items, action.payload]
-      state.total = action.payload.price * action.payload.quantity
+      const newItem = action.payload;
+      state.items.push(newItem)
+      state.total = calculateTotal(state.items);
     },
     increaseItemQuantity: (state, action) => {
       const itemId = action.payload;
       const index = state.items.findIndex((item: any) => item.id === itemId);
 
       if (index !== -1) {
-        state.items[index] = {
-          ...state.items[index],
-          quantity: state.items[index].quantity + 1
-        };
-        state.total = state.items[index].price * (state.items[index].quantity + 1)
+        state.items[index].quantity++
       }
+
+      state.total = calculateTotal(state.items)
     },
     decreaseItemQuantity: (state, action) => {
       const itemId = action.payload;
@@ -43,15 +42,34 @@ export const cartSlice = createSlice({
       if (index !== -1) {
         const item = state.items[index];
         if (item.quantity > 1) {
-
+          item.quantity--;
         }
         else {
           state.items.splice(index, 1);
         }
       }
+
+      state.total = calculateTotal(state.items);
+    },
+    clearCart: (state) => {
+      state.items.length = 0
+      state.total = 0
+    },
+    deleteItemFromCart: (state, action) => {
+      const itemId = action.payload
+      state.items = state.items.filter((item: any) => item.id !== itemId)
+      state.total = calculateTotal(state.items);
     }
   },
 })
 
-export const { addToCart, increaseItemQuantity, decreaseItemQuantity } = cartSlice.actions
+const calculateTotal = (cartItems: CartItem[]) => {
+  let total = 0
+  for (const item of cartItems) {
+    total += item.price * item.quantity
+  }
+  return total
+}
+
+export const { addToCart, increaseItemQuantity, decreaseItemQuantity, clearCart, deleteItemFromCart } = cartSlice.actions
 export default cartSlice.reducer

@@ -71,7 +71,7 @@ body{
       Error Page
 ======================= */
 .error-bg {
-  background: url("../../public/assets/error-page-gif.gif") no-repeat center;
+  background: url("../../public/assets/error-page.gif") no-repeat center;
   height: 350px;
 }
 
@@ -97,5 +97,5 @@ body{
 }
 
 .common-btn {
-  @apply bg-purple-600 text-white px-6 py-3 rounded-md;
+  @apply bg-purple-600 text-white px-6 py-3 rounded-md font-medium;
 }
