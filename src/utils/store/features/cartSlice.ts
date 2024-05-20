@@ -1,13 +1,17 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, current } from '@reduxjs/toolkit'
+
+interface CartItem {
+  id: number;
+  quantity: number;
+  price: number;
+}
 
 interface CartState {
-  items: object[];
-  total: number;
+  items: CartItem[];
 }
 
 const initialState: CartState = {
-  items: [],
-  total: 0
+  items: []
 }
 
 export const cartSlice = createSlice({
@@ -16,10 +20,33 @@ export const cartSlice = createSlice({
   reducers: {
     addToCart: (state, action) => {
       state.items = [...state.items, action.payload]
-      state.total = action.payload.price
+    },
+    increaseItemQuantity: (state, action) => {
+      const itemId = action.payload;
+      const index = state.items.findIndex((item: any) => item.id === itemId);
+
+      if (index !== -1) {
+        state.items[index] = {
+          ...state.items[index],
+          quantity: state.items[index].quantity + 1,
+          price: state.items[index].price * (state.items[index].quantity + 1)
+        };
+        console.log(state.items[index])
+      }
+    },
+    decreaseItemQuantity: (state, action) => {
+      const itemId = action.payload
+      const findItem: any = state.items?.find((item: any) => item?.id === itemId)
+      if (findItem?.quantity >= 1) {
+        findItem!.quantity--
+        console.log(current(findItem))
+      }
+      else if (findItem?.quantity < 1) {
+        console.log("Limit")
+      }
     }
   },
 })
 
-export const { addToCart } = cartSlice.actions
+export const { addToCart, increaseItemQuantity, decreaseItemQuantity } = cartSlice.actions
 export default cartSlice.reducer

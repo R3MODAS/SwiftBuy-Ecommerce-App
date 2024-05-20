@@ -1,10 +1,24 @@
 "use client"
 
+import { increaseItemQuantity, decreaseItemQuantity } from "@/utils/store/features/cartSlice";
+import { useAppDispatch, useAppSelector } from "@/utils/store/hooks";
+import { useState } from "react";
 import { FiMinusCircle, FiPlusCircle } from "react-icons/fi";
 import { MdDeleteOutline } from "react-icons/md";
 
 const CartItem = (item: any) => {
-  console.log(item)
+  // console.log(item)
+  const cartItems = useAppSelector(store => store.cart.items)
+  const [quantity, setQuantity] = useState<number>(1)
+  const dispatch = useAppDispatch()
+
+  const handleIncreaseItemQuantity = (id: number) => {
+    dispatch(increaseItemQuantity(id))
+  }
+
+  const handleDecreaseItemQuantity = (id: number) => {
+    dispatch(decreaseItemQuantity(id))
+  }
 
   return (
     <div className="flex items-center gap-5 mb-5">
@@ -16,13 +30,13 @@ const CartItem = (item: any) => {
         <span className="text-sm">${item?.price}</span>
       </div>
       <div className="text-xl flex items-center gap-2">
-        <button>
+        <button onClick={() => handleDecreaseItemQuantity(item?.id)}>
           <FiMinusCircle />
         </button>
         <button>
           {item?.quantity}
         </button>
-        <button>
+        <button onClick={() => handleIncreaseItemQuantity(item?.id)}>
           <FiPlusCircle />
         </button>
       </div>
