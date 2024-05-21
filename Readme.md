@@ -1,4 +1,4 @@
-# SwiftBuy E-commerce App
+# SwiftBuy Ecommerce App
 
 SwiftBuy is a modern e-commerce application built with Next.js 14, leveraging TypeScript for type safety, Tailwind CSS for styling, and Redux Toolkit with redux-persist for state management and persisting data. This application provides a seamless shopping experience with essential features such as product browsing, detailed product pages, a checkout system, and CRUD operations for cart management.
 
@@ -50,8 +50,8 @@ To get started with SwiftBuy, follow these steps:
 
 1. **Clone the repository**:
     ```bash
-    git clone https://github.com/R3MODAS/swiftbuy-ecommerce-app.git
-    cd swiftbuy-ecommerce-app
+    git clone https://github.com/R3MODAS/SwiftBuy-Ecommerce-App.git
+    cd SwiftBuy-Ecommerce-App
     ```
 
 2. **Install dependencies**:
