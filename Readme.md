@@ -24,25 +24,25 @@ SwiftBuy is a modern e-commerce application built with Next.js 14, leveraging Ty
 ## Pages
 
 ### Home Page
-![Home Page](public/assets/home-page.png)
+![Home Page](images/home-page.png)
 
 ### Product Details Page
-![Product Details Page](public/assets/product-details-page.png)
+![Product Details Page](images/product-details-page.png)
 
 ### Checkout Page
-![Checkout Page](public/assets/checkout-page.png)
+![Checkout Page](images/checkout-page.png)
 
 ### Checkout Page (Empty)
-![Checkout Page](public/assets/checkout-page.png)
+![Checkout Page](images/checkout-page.png)
 
 ### Login Page
-![Login Page](public/assets/login-page.png)
+![Login Page](images/login-page.png)
 
 ### Signup Page
-![Signup Page](public/assets/signup-page.png)
+![Signup Page](images/signup-page.png)
 
 ### Custom Error Page
-![Custom Error Page](public/assets/error-page.png)
+![Custom Error Page](images/error-page.png)
 
 ## Installation
 
